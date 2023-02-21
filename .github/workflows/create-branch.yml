@@ -1,0 +1,17 @@
+name: Create Branch from Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Create branch from issue
+        uses: peter-evans/create-pull-request@v3.7.0
+        with:
+          commit-message: 'Create branch for new issue'
+          branch: 'issue-${{ github.event.issue.number }}'
